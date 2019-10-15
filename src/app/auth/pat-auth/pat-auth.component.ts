@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatAuthComponent implements OnInit {
 
+  model: any  = {};
   constructor() { }
 
   ngOnInit() {

@@ -1,0 +1,44 @@
+.bg {
+    background-image: url("src/assets/images/bg_2.jpg");
+    background-size: cover;
+  }
+  
+  .box-login {
+    width: 100%;
+    height: 385px;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .box-login-header {
+    width: 100%;
+    height: 50px;
+    padding: 18px 8px;
+    text-align: center;
+  
+    h3 {
+      font-size: 2em;
+    }
+  }
+  
+  .box-login-body {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 4px;
+  }
+  
+  .box-login-footer {
+    width: 100%;
+    height: 65px;
+    padding-right: 34px;
+    padding-bottom: 24px;
+  }
+  
