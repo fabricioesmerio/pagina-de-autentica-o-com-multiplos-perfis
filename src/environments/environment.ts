@@ -3,6 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  host: 'http://192.168.2.47:3000/',
+  dashboard: 'https://google.com.br',
   production: false
 };
 

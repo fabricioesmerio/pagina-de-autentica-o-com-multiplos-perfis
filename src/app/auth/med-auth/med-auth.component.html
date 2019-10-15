@@ -1,0 +1,48 @@
+<div class="container-fluid bg" style="height: 100vh;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 d-flex align-items-center" style="height: 100vh;">
+                    <div class="box-login align-content-between">
+                        <div class="box-login-header">
+                            <h3>Autentique-se!</h3>
+                        </div>
+                        <div class="box-login-body">
+
+                            <form role="form" class="form">
+                                <div class="form-group mb-12">
+
+                                    <label class="w-72" for="inputUsuario">
+                                        Usuário
+                                    </label>
+                                    <input [(ngModel)]="model.login" name="login" type="text" class="form-control" id="inputUsuario" />
+                                </div>
+                                <div class="form-group mb-12">
+
+                                    <label class="w-72" for="inputSenha">
+                                        Senha
+                                    </label>
+                                    <input type="password" [(ngModel)]="model.senha" name="senha" class="form-control" id="inputSenha" />
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                        <div class="box-login-footer d-flex justify-content-end">
+                            <button type="button" (click)="click()" class="btn btn-outline-primary">
+                                <span>Login</span>
+                                <div *ngIf="loading" class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    teste 2
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
