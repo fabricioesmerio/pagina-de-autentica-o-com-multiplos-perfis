@@ -1,4 +1,4 @@
-# UiAuthGetLaudoExame
+# UI para o Sistema de On-line de Laudos e Exames Médicos
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
