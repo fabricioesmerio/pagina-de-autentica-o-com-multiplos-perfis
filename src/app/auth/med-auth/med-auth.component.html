@@ -15,14 +15,16 @@
                                     <label class="w-72" for="inputUsuario">
                                         Usuário
                                     </label>
-                                    <input [(ngModel)]="model.login" name="login" type="text" class="form-control" id="inputUsuario" />
+                                    <input #login [(ngModel)]="model.login" name="login" type="text"
+                                        class="form-control" id="inputUsuario" />
                                 </div>
                                 <div class="form-group mb-12">
 
                                     <label class="w-72" for="inputSenha">
                                         Senha
                                     </label>
-                                    <input type="password" [(ngModel)]="model.senha" name="senha" class="form-control" id="inputSenha" />
+                                    <input #senha type="password" [(ngModel)]="model.senha" name="senha"
+                                        class="form-control" id="inputSenha" />
                                 </div>
                             </form>
 
@@ -30,17 +32,15 @@
 
                         </div>
                         <div class="box-login-footer d-flex justify-content-end">
-                            <button type="button" (click)="click()" class="btn btn-outline-primary" 
-                            style="width: 95px;">
-                                <span *ngIf="!loading">Login</span>
-                                <div *ngIf="loading" class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
+                            <button type="button" (click)="signIn()" class="btn btn-primary" style="width: 95px;">
+                                Login
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

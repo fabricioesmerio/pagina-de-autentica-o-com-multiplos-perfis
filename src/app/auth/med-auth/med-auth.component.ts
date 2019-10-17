@@ -1,54 +1,71 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { SingInService } from 'src/app/sing-in.service';
+import { LocalStorageService } from 'src/app/local-storage.service';
 
 @Component({
   selector: 'app-med-auth',
   templateUrl: './med-auth.component.html',
   styleUrls: ['./med-auth.component.scss'],
-  providers: [AuthService]
 })
-export class MedAuthComponent implements OnInit {
+export class MedAuthComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('login') login: ElementRef;
+  @ViewChild('senha') senha: ElementRef;
   model: any = {};
   loading = false;
   env = environment;
 
   constructor(
     private toastr: ToastrService,
-    private auth: AuthService,
-    private router: Router
+    private singInService: SingInService,
+    private render: Renderer2,
+    private localStorage: LocalStorageService
   ) { }
 
   ngOnInit() {
-    this.loading = false;
-    // document.querySelector('body').style.backgroundImage = 'url(assets/images/bg_1.jpg)';
-    // document.querySelector('body').style.backgroundSize = 'cover';
+
   }
 
-  click() {
-    this.loading = true;
-    if (!this.model.login || !this.model.senha) {
+  ngAfterViewInit(): void {
+    this.render.selectRootElement(this.login.nativeElement).focus();
+  }
+  signIn() {
+    this.render.removeClass(this.login.nativeElement, 'invalid');
+    this.render.removeClass(this.senha.nativeElement, 'invalid');
+
+    if (!this.model || !this.model.login || !this.model.senha) {
+      this.toastr.error('Preencha todos os campos antes de prosseguir.', 'Sucesso!');
+      if (!this.model.login) {
+        this.render.addClass(this.login.nativeElement, 'invalid');
+        this.render.selectRootElement(this.login.nativeElement).focus();
+      }
+
+      if (!this.model.senha) {
+        this.render.addClass(this.senha.nativeElement, 'invalid');
+        if (this.model.login) {
+          this.render.selectRootElement(this.senha.nativeElement).focus();
+        }
+      }
       return;
     }
-    this.auth.loginMed(this.model)
+    this.loading = true;
+    this.singInService.login('auth', this.model)
       .subscribe(response => {
         if (response.auth) {
-          this.toastr.success('Login realizado com sucesso!', 'Sucesso!');
+          this.toastr.success('Login efetuado com sucesso.', 'Sucesso!');
+          this.localStorage.setTokenLocalStorage(response);
           setTimeout(() => {
-            this.router.navigate([this.env.dashboard]);
-          }, 3000);
-        } else {
-          this.toastr.error('Erro na autenticação', 'Erro!');
+            this.loading = false;
+            window.location.href = this.env.dashboard + 'app/principal';
+          }, 500);
         }
-        console.log('data login => ', response);
-        this.loading = false;
       }, err => {
-        console.log('erro login ', err);
-        this.toastr.error('Erro na autenticação', 'Erro!');
-        this.loading = false;
+        this.toastr.error(err.error.message, 'Erro!');
+        setTimeout(() => {
+          this.loading = false;
+        }, 500);
       });
   }
 
