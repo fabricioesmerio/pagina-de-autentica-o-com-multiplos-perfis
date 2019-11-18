@@ -9,8 +9,8 @@ import { IndexComponent } from './auth/index/index.component';
 const routes: Routes = [
   { path: 'auth/med', component: MedAuthComponent },
   { path: 'auth/pat', component: PatAuthComponent },
-  { path: 'auth/index', component: IndexComponent },
-  { path: '', redirectTo: 'auth/index', pathMatch: 'full'}
+  { path: 'auth', component: IndexComponent },
+  { path: '', redirectTo: 'auth', pathMatch: 'full'}
 ];
 
 @NgModule({
